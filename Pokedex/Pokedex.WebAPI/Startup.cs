@@ -1,25 +1,22 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Pokedex.WebAPI.Entities;
 using Pokedex.WebAPI.Interfaces;
 using Pokedex.WebAPI.Services;
 using Pokedex.WebAPI.Translators;
+using Polly;
+using Polly.Extensions.Http;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace Pokedex.WebAPI
 {
     public class Startup
-    {
+    {      
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -39,9 +36,9 @@ namespace Pokedex.WebAPI
 
             services.AddSingleton<ITranslatorFactory<Pokemon, string>, DefaultTranslatorFactory>();
             services.AddScoped<ITranslator<Pokemon>, PokemonDescriptionTranslator>();
-            services.AddHttpClient<YodaStringTranslator>(client => client.BaseAddress = new Uri(Configuration[$"ExternalUrls:{nameof(YodaStringTranslator)}"]));
-            services.AddHttpClient<ShakespeareStringTranslator>(client => client.BaseAddress = new Uri(Configuration[$"ExternalUrls:{nameof(ShakespeareStringTranslator)}"]));         
-            services.AddHttpClient<IStore<Pokemon>, PokeAPIPokemonStore>(client => client.BaseAddress = new Uri(Configuration[$"ExternalUrls:{nameof(PokeAPIPokemonStore)}"]));          
+            services.AddHttpClient<YodaStringTranslator>().AddExponentialRetryPolicy().AddCircuitBreakerPolicy().SetBaseUrl(Configuration[$"ExternalUrls:{nameof(YodaStringTranslator)}"]);
+            services.AddHttpClient<ShakespeareStringTranslator>().AddExponentialRetryPolicy().AddCircuitBreakerPolicy().SetBaseUrl(Configuration[$"ExternalUrls:{nameof(ShakespeareStringTranslator)}"]);
+            services.AddHttpClient<IStore<Pokemon>, PokeAPIPokemonStore>().AddExponentialRetryPolicy().SetBaseUrl(Configuration[$"ExternalUrls:{nameof(PokeAPIPokemonStore)}"]);          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

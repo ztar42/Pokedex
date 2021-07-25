@@ -7,11 +7,14 @@ D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\bin\Debug\net5.0\Pokedex.WebAPI.runtimeco
 D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\bin\Debug\net5.0\Pokedex.WebAPI.dll
 D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\bin\Debug\net5.0\ref\Pokedex.WebAPI.dll
 D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\bin\Debug\net5.0\Pokedex.WebAPI.pdb
+D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\bin\Debug\net5.0\Microsoft.Extensions.Http.Polly.dll
 D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\bin\Debug\net5.0\Microsoft.OpenApi.dll
+D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\bin\Debug\net5.0\Polly.dll
+D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\bin\Debug\net5.0\Polly.Contrib.WaitAndRetry.dll
+D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\bin\Debug\net5.0\Polly.Extensions.Http.dll
 D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\obj\Debug\net5.0\Pokedex.WebAPI.csproj.AssemblyReference.cache
 D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\obj\Debug\net5.0\Pokedex.WebAPI.GeneratedMSBuildEditorConfig.editorconfig
 D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\obj\Debug\net5.0\Pokedex.WebAPI.AssemblyInfoInputs.cache
 D:\repo\Pokedex\Pokedex\Pokedex.WebAPI\obj\Debug\net5.0\Pokedex.WebAPI.AssemblyInfo.cs
