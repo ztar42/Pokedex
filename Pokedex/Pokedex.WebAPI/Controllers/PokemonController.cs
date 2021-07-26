@@ -40,7 +40,11 @@ namespace Pokedex.WebAPI.Controllers
         {
             var pokemon = await pokemonStore.GetByNameAsync(name);
             if (pokemon == null)
+            {
+                logger.LogInformation("Pokemon {@name} has not been found", name);
                 return NotFound();
+            }
+            logger.LogInformation("Pokemon {@name} has been found: {@pokemon}", name, pokemon);
             return Ok(pokemon);
         }      
     }

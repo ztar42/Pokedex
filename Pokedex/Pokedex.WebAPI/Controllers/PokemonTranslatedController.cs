@@ -41,10 +41,18 @@ namespace Pokedex.WebAPI.Controllers
         {
             Pokemon pokemon = await pokemonStore.GetByNameAsync(name);
             if (pokemon == null)
+            {
+                logger.LogInformation("Pokemon {@name} has not been found", name);
                 return NotFound();
+            }
+            logger.LogInformation("Pokemon {@name} has been found: {@pokemon}", name, pokemon);
             Pokemon translated = await pokemonTranslationService.TranslateAsync(pokemon);
             if (translated == null)
+            {
+                logger.LogInformation("Pokemon {@name} has not been translated", name);
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+            logger.LogInformation("Pokemon {@name} has been translated: {@translated}", name, translated);
             return Ok(translated);
         }
     }
