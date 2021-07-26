@@ -14,7 +14,7 @@ namespace Pokedex.WebAPI.Tests.Translators
         {
             var configuration = Helpers.CreateAppSettingsConfiguration();
             var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri(configuration[$"ExternalUrls:{nameof(YodaStringTranslator)}"]);
+            httpClient.BaseAddress = new Uri(configuration[$"HttpClientConfig:BaseUrls:{nameof(YodaStringTranslator)}"]);
             this.sut = new YodaStringTranslator(httpClient);
         }
 

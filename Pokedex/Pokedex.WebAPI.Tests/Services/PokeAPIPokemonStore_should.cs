@@ -23,7 +23,7 @@ namespace Pokedex.WebAPI.Tests.Services
 
             var configuration = Helpers.CreateAppSettingsConfiguration();
             var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri(configuration[$"ExternalUrls:{nameof(PokeAPIPokemonStore)}"]);
+            httpClient.BaseAddress = new Uri(configuration[$"HttpClientConfig:BaseUrls:{nameof(PokeAPIPokemonStore)}"]);
             this.sut = new PokeAPIPokemonStore(httpClient);
         }
 
