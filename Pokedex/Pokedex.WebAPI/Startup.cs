@@ -6,17 +6,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Pokedex.WebAPI.Configuration;
 using Pokedex.WebAPI.Entities;
 using Pokedex.WebAPI.HealthChecks;
-using Pokedex.WebAPI.Infrastructure;
 using Pokedex.WebAPI.Interfaces;
 using Pokedex.WebAPI.Services;
 using Pokedex.WebAPI.Translators;
-using Polly;
-using Polly.Extensions.Http;
-using System;
-using System.Net.Http;
 
 namespace Pokedex.WebAPI
 {

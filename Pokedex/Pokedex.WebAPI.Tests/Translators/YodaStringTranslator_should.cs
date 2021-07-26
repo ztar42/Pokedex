@@ -1,9 +1,7 @@
 ﻿using Pokedex.WebAPI.Translators;
-using System;
 using System.Threading.Tasks;
 using Xunit;
 using System.Net.Http;
-using Microsoft.Extensions.Configuration;
 
 namespace Pokedex.WebAPI.Tests.Translators
 {

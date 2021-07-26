@@ -2,9 +2,6 @@
 using Pokedex.WebAPI.Interfaces;
 using Pokedex.WebAPI.Translators;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Pokedex.WebAPI.Services
 {

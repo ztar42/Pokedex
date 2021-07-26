@@ -3,10 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Pokedex.WebAPI.Entities;
 using Pokedex.WebAPI.Interfaces;
-using Pokedex.WebAPI.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Pokedex.WebAPI.Controllers

@@ -1,10 +1,8 @@
 using Bogus;
 using Moq;
-using Pokedex.WebAPI.Entities;
 using Pokedex.WebAPI.Services;
 using Pokedex.WebAPI.Translators;
 using System;
-using System.IO;
 using Xunit;
 
 namespace Pokedex.WebAPI.Tests.Services

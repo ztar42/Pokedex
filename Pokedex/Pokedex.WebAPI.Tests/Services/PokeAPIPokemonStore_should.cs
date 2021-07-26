@@ -1,16 +1,7 @@
-﻿using Microsoft.Extensions.Hosting;
-using Pokedex.WebAPI.Translators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.AspNetCore.Hosting;
+﻿using System.Threading.Tasks;
 using Xunit;
 using Pokedex.WebAPI.Services;
 using Pokedex.WebAPI.Entities;
-using Microsoft.Extensions.Configuration;
 using System.Net.Http;
 
 namespace Pokedex.WebAPI.Tests.Services
