@@ -63,8 +63,6 @@ namespace Pokedex.WebAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pokedex.WebAPI v1"));
             }
 
-            app.UseHttpsRedirection();
-
             app.UseHealthChecks("/hc/startup", new HealthCheckOptions() { Predicate = x => x.Tags.Contains("startup") });
             app.UseHealthChecks("/hc/live", new HealthCheckOptions() { Predicate = x => x.Tags.Contains("liveness") });
 
