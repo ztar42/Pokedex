@@ -34,8 +34,9 @@ namespace Pokedex.WebAPI.Controllers
         /// <returns>Pokemon description</returns>
         [HttpGet("{name}")]
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Pokemon))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get(string name)
         {
             Pokemon pokemon = await pokemonStore.GetByNameAsync(name);
