@@ -21,6 +21,36 @@ docker build -t pokedex -f Pokedex\Pokedex.WebAPI\Dockerfile Pokedex
 docker run -it -p 5000:80 pokedex
 ```
 
+## Configuration
+You can configure underlying requests to external APIs using HttpClientConfig section in _appsettings.json_
+
+```json
+"HttpClientConfig": {
+    "RetryPolicy": {
+      "FirstRetryDelayMs": 100,
+      "NumberOfRetries": 3
+    },
+    "CircuitBreakerPolicy": {
+      "HandledEventsBeforeBreaking": 2,
+      "DurationOfBreakMs": 300000
+    },
+    "ClientConfigs": {
+      "YodaStringTranslator": {
+        "BaseUrl": "https://api.funtranslations.com/translate/yoda.json?text=",
+        "Policies": [ "Retry", "CircuitBreaker" ]
+      },
+      "ShakespeareStringTranslator": {
+        "BaseUrl": "https://api.funtranslations.com/translate/shakespeare.json?text=",
+        "Policies": [ "Retry", "CircuitBreaker" ]
+      },
+      "PokeAPIPokemonStore": {
+        "BaseUrl": "https://pokeapi.co/api/v2/pokemon-species/",
+        "Policies": [ "Retry" ]
+      }
+    }
+  }
+```
+
 ## Usage
 
 Web service has two endpoints that will return original and translated information respectively:
