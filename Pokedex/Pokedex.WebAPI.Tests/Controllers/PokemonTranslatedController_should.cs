@@ -21,7 +21,7 @@ namespace Pokedex.WebAPI.Tests.Controllers
 
         public PokemonTranslatedController_should()
         {
-            host = Helpers.CreateHostForControllers(typeof(PokemonTranslatedController));           
+            host = Helpers.CreateTestHost();           
             host.Start();
             sut = host.GetTestClient();
         }

@@ -12,7 +12,7 @@ namespace Pokedex.WebAPI.Tests.Translators
         private readonly YodaStringTranslator sut;
         public YodaStringTranslator_should()
         {
-            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            var configuration = Helpers.CreateAppSettingsConfiguration();
             var httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(configuration[$"ExternalUrls:{nameof(YodaStringTranslator)}"]);
             this.sut = new YodaStringTranslator(httpClient);

@@ -21,7 +21,7 @@ namespace Pokedex.WebAPI.Tests.Services
         public PokeAPIPokemonStore_should()
         {
 
-            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            var configuration = Helpers.CreateAppSettingsConfiguration();
             var httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(configuration[$"ExternalUrls:{nameof(PokeAPIPokemonStore)}"]);
             this.sut = new PokeAPIPokemonStore(httpClient);
