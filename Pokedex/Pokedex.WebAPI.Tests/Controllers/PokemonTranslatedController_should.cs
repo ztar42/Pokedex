@@ -36,7 +36,7 @@ namespace Pokedex.WebAPI.Tests.Controllers
         public async Task respond_ok_to_existing_pokemon()
         {
             var name = "mewtwo";
-            var actual = await this.sut.GetAsync($"/pokemon/{name}");
+            var actual = await this.sut.GetAsync($"/pokemon/translated/{name}");
             Assert.Equal(HttpStatusCode.OK, actual.StatusCode);
 
             Pokemon entity = await JsonSerializer.DeserializeAsync<Pokemon>(await actual.Content.ReadAsStreamAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
@@ -47,7 +47,7 @@ namespace Pokedex.WebAPI.Tests.Controllers
         public async Task respond_not_found_to_non_existing_pokemon()
         {
             var name = "porsche";
-            var actual = await this.sut.GetAsync($"/pokemon/{name}");
+            var actual = await this.sut.GetAsync($"/pokemon/translated/{name}");
             Assert.Equal(HttpStatusCode.NotFound, actual.StatusCode);
         }
     }
