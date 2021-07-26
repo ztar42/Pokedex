@@ -32,8 +32,7 @@ namespace Pokedex.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var httpClientConfig = Configuration.GetSection(nameof(HttpClientConfig)).Get<HttpClientConfig>();
-            var httpClientPolicyManager = new HttpClientPolicyManager(httpClientConfig);
+            services.ConfigureHttpClients(Configuration);
 
             services.AddHealthChecks()
                 .AddCheck("StartupCheck", () => HealthCheckResult.Healthy(), tags: new [] {"startup"})
@@ -48,9 +47,9 @@ namespace Pokedex.WebAPI
 
             services.AddSingleton<ITranslatorFactory<Pokemon, string>, DefaultTranslatorFactory>();
             services.AddScoped<ITranslator<Pokemon>, PokemonDescriptionTranslator>();
-            services.AddConfiguredHttpClient<YodaStringTranslator>(httpClientConfig).AddRetryPolicy(httpClientPolicyManager);
-            services.AddConfiguredHttpClient<ShakespeareStringTranslator>(httpClientConfig).AddRetryPolicy(httpClientPolicyManager);
-            services.AddConfiguredHttpClient<IStore<Pokemon>, PokeAPIPokemonStore>(httpClientConfig).AddRetryAndCircuitBreakerPolicies(httpClientPolicyManager);
+            services.AddConfiguredHttpClient<YodaStringTranslator>();
+            services.AddConfiguredHttpClient<ShakespeareStringTranslator>();
+            services.AddConfiguredHttpClient<IStore<Pokemon>, PokeAPIPokemonStore>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

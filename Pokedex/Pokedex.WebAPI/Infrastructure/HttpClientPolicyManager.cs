@@ -12,10 +12,11 @@ using System.Threading.Tasks;
 
 namespace Pokedex.WebAPI.Infrastructure
 {
-    public class HttpClientPolicyManager
+    public sealed class HttpClientPolicyManager
     {
         private readonly IAsyncPolicy<HttpResponseMessage> exponentialRetryPolicy;
         private readonly IAsyncPolicy<HttpResponseMessage> circutBreakerPolicy;
+        private readonly Dictionary<Configuration.Policy, IAsyncPolicy<HttpResponseMessage>> policyMap;
         public HttpClientPolicyManager(HttpClientConfig configuration)
         {
             //configure retry policy
@@ -27,15 +28,26 @@ namespace Pokedex.WebAPI.Infrastructure
                 .OrTransientHttpStatusCode()
                 .WaitAndRetryAsync(jitteredDelayGenerator);
 
-            //configure circutbreaker policy
-            var eventsBeforeBreaking = configuration.CircutBreakerPolicy.HandledEventsBeforeBreaking;
-            var delayOfBreak = TimeSpan.FromMilliseconds(configuration.CircutBreakerPolicy.HandledEventsBeforeBreaking);
+            //configure circuitbreaker policy
+            var eventsBeforeBreaking = configuration.CircuitBreakerPolicy.HandledEventsBeforeBreaking;
+            var delayOfBreak = TimeSpan.FromMilliseconds(configuration.CircuitBreakerPolicy.HandledEventsBeforeBreaking);
             this.circutBreakerPolicy = Policy<HttpResponseMessage>
                 .HandleResult(x => x.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
                 .CircuitBreakerAsync(eventsBeforeBreaking, delayOfBreak);
+
+            policyMap = new Dictionary<Configuration.Policy, IAsyncPolicy<HttpResponseMessage>>()
+            {
+                [Configuration.Policy.Retry] = exponentialRetryPolicy,
+                [Configuration.Policy.CircuitBreaker] = circutBreakerPolicy
+            };
         }
 
-        public void ApplyRetryPolicy(IHttpClientBuilder builder) => builder.AddPolicyHandler(x => exponentialRetryPolicy);
-        public void ApplyCircuitBreakerPolicy(IHttpClientBuilder builder) => builder.AddPolicyHandler(x => circutBreakerPolicy);
+        public void ApplyPolicies(IHttpClientBuilder builder, params Configuration.Policy[] policies)
+        {
+            if (policies == null)
+                return;
+            foreach (var policy in policies)
+                builder.AddPolicyHandler(x => policyMap[policy]);
+        }
     }
 }

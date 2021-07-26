@@ -25,6 +25,8 @@ namespace Pokedex.WebAPI.Tests
                 .ConfigureWebHost(host => host.UseStartup<Startup>().UseTestServer())
                 .Build();
         }
+        public static Uri GetBaseUrlForClient(this IConfiguration configuration, Type type) =>
+            new Uri(configuration[$"HttpClientConfig:ClientConfigs:{type.Name}:BaseUrl"]);
         public static Pokemon GetRandomPokemon()
         {
             Faker faker = new Faker();

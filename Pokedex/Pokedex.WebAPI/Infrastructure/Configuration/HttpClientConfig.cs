@@ -8,8 +8,8 @@ namespace Pokedex.WebAPI.Configuration
     public class HttpClientConfig
     {
         public RetryPolicyConfiguration RetryPolicy { get; set; }
-        public CircutBreakerPolicyConfiguration CircutBreakerPolicy { get; set; }
-        public Dictionary<string,string> BaseUrls { get; set; }
+        public CircuitBreakerPolicyConfiguration CircuitBreakerPolicy { get; set; }
+        public Dictionary<string, ClientItemConfig> ClientConfigs { get; set; }
     }
 
     public class RetryPolicyConfiguration
@@ -18,9 +18,14 @@ namespace Pokedex.WebAPI.Configuration
         public int NumberOfRetries { get; set; }
     }
 
-    public class CircutBreakerPolicyConfiguration
+    public class CircuitBreakerPolicyConfiguration
     {
         public int HandledEventsBeforeBreaking { get; set; }
         public int DurationOfBreakMs { get; set; }
+    }
+    public class ClientItemConfig
+    {
+        public string BaseUrl { get; set; }
+        public Policy[] Policies { get; set; }
     }
 }

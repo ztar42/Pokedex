@@ -14,7 +14,7 @@ namespace Pokedex.WebAPI.Tests.Translators
         {
             var configuration = Helpers.CreateAppSettingsConfiguration();
             var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri(configuration[$"HttpClientConfig:BaseUrls:{nameof(ShakespeareStringTranslator)}"]);
+            httpClient.BaseAddress = configuration.GetBaseUrlForClient(typeof(ShakespeareStringTranslator));
             this.sut = new ShakespeareStringTranslator(httpClient);
         }
 
